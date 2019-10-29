@@ -89,7 +89,7 @@ var readCommand = function(message) {
 var postConnectedUsersMessage = function(chatId) {
   var responseText = 'Ci sono ' + (usersList.length-1) + ' utenti connessi a Mumble:\n';
   usersList.forEach(function(user) {
-    if (not (user.name).endsWith('Bot')) {
+    if (!(user.name).endsWith('Bot')) {
       responseText += user.name + '\n';
     }
   });
@@ -113,9 +113,7 @@ var onUserConnected = function(user) {
   usersList.push(user);
   console.log('Current users list:');
   usersList.forEach(function(user) {
-    if (not (user.name).endsWith('Bot')) {
-      console.log(user.name + '\n');
-    }
+    console.log(user.name + '\n');
   });
   var messageText = user.name + ' si è appena connesso a Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
@@ -132,9 +130,7 @@ var onUserDisconnected = function(userDisconnected) {
   });
   console.log('Current users list:');
   usersList.forEach(function(user) {
-    if (not (user.name).endsWith('Bot')) {
-      console.log(user.name);
-    }
+    console.log(user.name);
   });
   var messageText = userDisconnected.name + ' si è appena disconnesso da Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
