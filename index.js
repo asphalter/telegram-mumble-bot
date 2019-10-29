@@ -87,9 +87,9 @@ var readCommand = function(message) {
 };
 
 var postConnectedUsersMessage = function(chatId) {
-  var responseText = 'Ci sono ' + usersList.length + ' utenti connessi a Mumble:\n';
+  var responseText = 'Ci sono ' + (usersList.length-1) + ' utenti connessi a Mumble:\n';
   usersList.forEach(function(user) {
-    if (not user.name.endsWith('Bot')) {
+    if (not (user.name).endsWith('Bot')) {
       responseText += user.name + '\n';
     }
   });
@@ -113,7 +113,7 @@ var onUserConnected = function(user) {
   usersList.push(user);
   console.log('Current users list:');
   usersList.forEach(function(user) {
-    if (not user.name.endsWith('Bot')) {
+    if (not (user.name).endsWith('Bot')) {
       console.log(user.name + '\n');
     }
   });
@@ -132,7 +132,7 @@ var onUserDisconnected = function(userDisconnected) {
   });
   console.log('Current users list:');
   usersList.forEach(function(user) {
-    if (not user.name.endsWith('Bot')) {
+    if (not (user.name).endsWith('Bot')) {
       console.log(user.name);
     }
   });
