@@ -67,7 +67,7 @@ var readCommand = function(message) {
   if (message) {
     if (message.text !== undefined) {
       if (message.text === '/start') {
-        api.sendMessage({ chat_id: message.chat.id, text: 'yo' }, function (err, message) {
+        api.sendMessage({ chat_id: message.chat.id, text: 'Ci sono, lasciami riposare :joy:' }, function (err, message) {
           if (err) {
             console.log(err);
           }
@@ -153,9 +153,9 @@ var onMessage = function (message, user) {
 var onError = function (error) {
   console.log('Mumble error:');
   console.log(error);
-  // api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: 'ERROR: ' + error }, function (err, message) {
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  // });
+  api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: 'ERROR: ' + error }, function (err, message) {
+    if (err) {
+      console.log(err);
+    }
+  });
 };
