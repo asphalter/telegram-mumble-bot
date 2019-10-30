@@ -67,7 +67,7 @@ var readCommand = function(message) {
   if (message) {
     if (message.text !== undefined) {
       if (message.text === '/start') {
-        api.sendMessage({ chat_id: message.chat.id, text: 'Ci sono, lasciami riposare :joy:' }, function (err, message) {
+        api.sendMessage({ chat_id: message.chat.id, text: 'Ciao' }, function (err, message) {
           if (err) {
             console.log(err);
           }
