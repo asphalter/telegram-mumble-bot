@@ -82,6 +82,10 @@ var readCommand = function(message) {
         }
       } else if (message.text.startsWith('/reconnect')) {
         console.log('reconnecting mumble');
+        api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: 'Aspetta, mi ricollego subito a Mumble. Chi ha scritto la mia libreria è un NoooooB e non mi ricollego da solo.' }, function (err, message) {
+            if (err) {
+              console.log(err);
+            }
         mumbleConnect();
       }
     } else {
