@@ -22,20 +22,7 @@ var options = {
   cert: fs.readFileSync('cert.pem')
 };
 var mumbleClient;
-Mumble.connect(config.MUMBLE_URL, options, function(error, client) {
-  if (error) {
-    console.log(error);
-    return;
-  }
-  console.log('Connected to Mumble.');
-  mumbleClient = client;
-  client.authenticate(config.MUMBLE_USER, config.MUMBLE_PASSWORD);
-  client.on('initialized', onInit);
-  client.on('user-connect', onUserConnected);
-  client.on('user-disconnect', onUserDisconnected);
-  client.on('message', onMessage);
-  client.on('error', onError);
-});
+mumbleConnect();
 
 // SERVER SETUP
 var app = express();
@@ -61,6 +48,23 @@ var server = app.listen(config.SERVER_PORT, function () {
   console.log('Server listening at http://%s:%s', host, port);
 });
 
+var mumbleConnect = function() {
+    Mumble.connect(config.MUMBLE_URL, options, function(error, client) {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      console.log('Connected to Mumble.');
+      mumbleClient = client;
+      client.authenticate(config.MUMBLE_USER, config.MUMBLE_PASSWORD);
+      client.on('initialized', onInit);
+      client.on('user-connect', onUserConnected);
+      client.on('user-disconnect', onUserDisconnected);
+      client.on('message', onMessage);
+      client.on('error', onError);
+    });
+}
+
 var readCommand = function(message) {
   console.log('Reading command...');
   console.log(message);
@@ -77,6 +81,9 @@ var readCommand = function(message) {
         if (mumbleClient.ready) {
           postConnectedUsersMessage(message.chat.id);
         }
+      } else if (message.text.startsWith('/reconnect')) {
+        console.log('reconnecting mumble');
+        mumbleConnect();
       }
     } else {
       console.log('Message text missing');
