@@ -22,7 +22,6 @@ var options = {
   cert: fs.readFileSync('cert.pem')
 };
 var mumbleClient;
-mumbleConnect();
 
 // SERVER SETUP
 var app = express();
@@ -114,6 +113,8 @@ var onInit = function() {
   usersList = mumbleClient.users();
   postConnectedUsersMessage(config.TELEGRAM_CHAT_ID);
 };
+
+mumbleConnect();
 
 var onUserConnected = function(user) {
   console.log(user.name + ' connected');
