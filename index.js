@@ -86,7 +86,7 @@ var readCommand = function(message) {
             if (err) {
               console.log(err);
             }
-        }
+        });
         mumbleConnect();
       }
     } else {
