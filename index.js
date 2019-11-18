@@ -128,7 +128,12 @@ var onUserConnected = function(user) {
   usersList.forEach(function(user) {
     console.log(user.name + '\n');
   });
-  var messageText = user.name + ' si è appena connesso a Mumble';
+  if ((user.name).toLowerCase().includes('rik') || (user.name).toLowerCase().includes('coniglio') || (user.name).toLowerCase().includes('rabbit') || (user.name).toLowerCase().includes('rosso') || (user.name).toLowerCase().includes('red')) {
+      lolname = 'Zerby';
+  } else {
+      lolname = user.name;
+  }
+  var messageText = lolname + ' si è appena connesso a Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
     if (err) {
       console.log(err);
