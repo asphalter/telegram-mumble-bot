@@ -76,12 +76,7 @@ var readCommand = function(message) {
           }
         });
       } else if (message.text.startsWith('/mumble')) {
-        console.log('client ready?'+mumbleClient.ready);
-        if (mumbleClient.ready) {
-          postConnectedUsersMessage(message.chat.id);
-        }
-      } else if (message.text.startsWith('/reconnect')) {
-        console.log('reconnecting mumble');
+        console.log('reconnecting to mumble');
         api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: 'Aspetta, mi ricollego subito a Mumble. Chi ha scritto la mia libreria è un NoooooB e non mi ricollego da solo.' }, function (err, message) {
             if (err) {
               console.log(err);
@@ -97,26 +92,11 @@ var readCommand = function(message) {
   }
 };
 
-var postConnectedUsersMessage = function(chatId) {
-  var responseText = 'Ci sono ' + (usersList.length-1) + ' utenti connessi a Mumble:\n';
-  usersList.forEach(function(user) {
-    if (!(user.name).endsWith('Bot')) {
-      responseText += user.name + '\n';
-    }
-  });
-  api.sendMessage({ chat_id: chatId, text: responseText }, function (err, message) {
-    if (err) {
-      console.log(err);
-    }
-  });
-};
-
 // MUMBLE LISTENER FUNCTIONS
 var usersList = [];
 var onInit = function() {
   console.log('Mumble connection initialized');
   usersList = mumbleClient.users();
-  postConnectedUsersMessage(config.TELEGRAM_CHAT_ID);
 };
 
 mumbleConnect();
