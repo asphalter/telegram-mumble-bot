@@ -130,7 +130,12 @@ var onUserDisconnected = function(userDisconnected) {
   usersList.forEach(function(user) {
     console.log(user.name);
   });
-  var messageText = userDisconnected.name + ' si è appena disconnesso da Mumble';
+  if ((userDisconnected.name).toLowerCase().includes('rik') || (userDisconnected.name).toLowerCase().includes('coniglio') || (userDisconnected.name).toLowerCase().includes('rabbit') || (userDisconnected.name).toLowerCase().includes('rosso') || (userDisconnected.name).toLowerCase().includes('red')) {
+      lolname = 'Zerby';
+  } else {
+      lolname = userDisconnected.name;
+  }
+  var messageText = lolname + ' si è appena disconnesso da Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
     if (err) {
       console.log(err);
