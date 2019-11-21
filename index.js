@@ -113,7 +113,7 @@ var onUserConnected = function(user) {
   //} else {
   //    lolname = user.name;
   //}
-  var messageText = lolname + ' si è appena connesso a Mumble';
+  var messageText = user.name + ' si è appena connesso a Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
     if (err) {
       console.log(err);
@@ -142,7 +142,7 @@ var onUserDisconnected = function(userDisconnected) {
   //} else {
   //    lolname = userDisconnected.name;
   //}
-  var messageText = lolname + ' si è appena disconnesso da Mumble';
+  var messageText = userDisconnected.name + ' si è appena disconnesso da Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
     if (err) {
       console.log(err);
