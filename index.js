@@ -108,17 +108,24 @@ var onUserConnected = function(user) {
   usersList.forEach(function(user) {
     console.log(user.name + '\n');
   });
-  if ((user.name).toLowerCase().includes('rik') || (user.name).toLowerCase().includes('coniglio') || (user.name).toLowerCase().includes('rabbit') || (user.name).toLowerCase().includes('rosso') || (user.name).toLowerCase().includes('red')) {
-      lolname = 'Zerby';
-  } else {
-      lolname = user.name;
-  }
+  //if ((user.name).toLowerCase().includes('rik') || (user.name).toLowerCase().includes('coniglio') || (user.name).toLowerCase().includes('rabbit') || (user.name).toLowerCase().includes('rosso') || (user.name).toLowerCase().includes('red')) {
+  //    lolname = 'Zerby';
+  //} else {
+  //    lolname = user.name;
+  //}
   var messageText = lolname + ' si è appena connesso a Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
     if (err) {
       console.log(err);
     }
   });
+  if ((user.name).toLowerCase().includes('rik') || (user.name).toLowerCase().includes('coniglio') || (user.name).toLowerCase().includes('rabbit') || (user.name).toLowerCase().includes('rosso') || (user.name).toLowerCase().includes('red')) {
+      api.sendPhoto({ chat_id: config.TELEGRAM_CHAT_ID, caption: '(Foto illustrativa)', photo: 'zerby.jpg' }, function (err, message) {
+        if (err) {
+          console.log(err);
+        }
+      });
+  }
 };
 
 var onUserDisconnected = function(userDisconnected) {
@@ -130,11 +137,11 @@ var onUserDisconnected = function(userDisconnected) {
   usersList.forEach(function(user) {
     console.log(user.name);
   });
-  if ((userDisconnected.name).toLowerCase().includes('rik') || (userDisconnected.name).toLowerCase().includes('coniglio') || (userDisconnected.name).toLowerCase().includes('rabbit') || (userDisconnected.name).toLowerCase().includes('rosso') || (userDisconnected.name).toLowerCase().includes('red')) {
-      lolname = 'Zerby';
-  } else {
-      lolname = userDisconnected.name;
-  }
+  //if ((userDisconnected.name).toLowerCase().includes('rik') || (userDisconnected.name).toLowerCase().includes('coniglio') || (userDisconnected.name).toLowerCase().includes('rabbit') || (userDisconnected.name).toLowerCase().includes('rosso') || (userDisconnected.name).toLowerCase().includes('red')) {
+  //    lolname = 'Zerby';
+  //} else {
+  //    lolname = userDisconnected.name;
+  //}
   var messageText = lolname + ' si è appena disconnesso da Mumble';
   api.sendMessage({ chat_id: config.TELEGRAM_CHAT_ID, text: messageText }, function (err, message) {
     if (err) {
